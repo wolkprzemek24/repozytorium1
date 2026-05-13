@@ -21,6 +21,6 @@ jobs:
           python-version: '3.12'
           cache: 'pip' # Zadanie 7: Dodanie cache pip [cite: 108]
       - name: Install Dependencies # [cite: 9]
-        run: pip install -r requirements.txt
+        run: pip install -r ./mysite/requirements.txt
       - name: Basic Check
         run: python manage.py check
