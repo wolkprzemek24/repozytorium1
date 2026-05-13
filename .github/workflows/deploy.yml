@@ -19,9 +19,4 @@ jobs:
       - name: Wait for services
         run: sleep 15
         
-      - name: Login to Registry 
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-      - name: Push and Deploy 
-        run: |
-          docker push my-django-app
-          # Tutaj komenda deployu na serwer [cite: 81]
+    
