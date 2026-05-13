@@ -1,0 +1,17 @@
+name: Deploy
+on:
+  push:
+    branches: [main] 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker Image 
+        run: docker build -t my-django-app .
+      - name: Login to Registry 
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Push and Deploy 
+        run: |
+          docker push my-django-app
+          # Tutaj komenda deployu na serwer [cite: 81]
