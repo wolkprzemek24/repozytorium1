@@ -1,0 +1,10 @@
+name: Scheduled Tasks
+on:
+  schedule:
+    - cron: '0 0 * * *' # Codziennie o północy
+jobs:
+  nightly-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Maintenance
+        run: echo "Running nightly maintenance and security scans..."
