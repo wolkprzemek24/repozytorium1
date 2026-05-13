@@ -25,4 +25,4 @@ jobs:
       - name: Install Dependencies # [cite: 9]
         run: pip install -r ./mysite/requirements.txt
       - name: Basic Check
-        run: python manage.py check
+        run: python ./mysite/manage.py check
