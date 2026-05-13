@@ -1,0 +1,32 @@
+name: Integration Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      # Zadanie 3: Baza PostgreSQL 
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }} 
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        ports: [5432:5432]
+      # Zadanie 6: Redis dla Celery 
+      redis:
+        image: redis:latest
+        ports: [6379:6379]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run Migrations 
+        run: python manage.py migrate
+      - name: Run Tests 
+        run: python manage.py test
