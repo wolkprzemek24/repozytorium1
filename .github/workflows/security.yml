@@ -1,15 +1,51 @@
-name: Security
-on: [push, pull_request]
+#name: Security
+#on: [push, pull_request]
+#jobs:
+ # security:
+  #  runs-on: ubuntu-latest
+   # steps:
+    #  - uses: actions/checkout@v4
+     # - name: Run Bandit 
+      #  run: |
+       #   pip install bandit
+        #  bandit -r .
+      #- name: Run Safety 
+       # run: |
+        #  pip install safety
+         # safety check 
+name: Security Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
   security:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v4
-      - name: Run Bandit 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip' # Optymalizacja zgodnie z dokumentacją [cite: 16, 108]
+
+      - name: Install dependencies
         run: |
-          pip install bandit
-          bandit -r .
-      - name: Run Safety 
-        run: |
-          pip install safety
-          safety check 
+          python -m pip install --upgrade pip
+          pip install bandit safety
+          if [ -f requirements.txt ]; then pip install -r ./mtsite/requirements.txt; fi
+
+      - name: Run Bandit (Static Analysis)
+        # Skanuje kod pod kątem luk bezpieczeństwa [cite: 66]
+        run: bandit -r . -ll
+
+      - name: Run Safety (Dependency Check)
+        # Sprawdza znane podatności w zainstalowanych paczkach [cite: 67, 68]
+        # Używamy GitHub Secrets, jeśli masz klucz API Safety, lub trybu darmowego
+        run: safety check --full-report
