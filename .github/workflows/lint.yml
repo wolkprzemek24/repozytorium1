@@ -1,17 +1,57 @@
+#name: Linting
+#on: [push, pull_request]
+#jobs:
+ # lint:
+  #  runs-on: ubuntu-latest
+   # steps:
+    #  - uses: actions/checkout@v4
+     # - name: Set up Python 3.12
+      #  uses: actions/setup-python@v5
+       # with:
+        #  python-version: '3.12'
+      #- name: Run Linters # [cite: 28]
+       # run: |
+        #  pip install flake8 black isort
+         # flake8 . 
+          #black --check . 
+          #isort --check-only . 
 name: Linting
-on: [push, pull_request]
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    # Oddzielny job lint wykonujący się równolegle [cite: 33, 34]
+    runs-on: ubuntu-latest 
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-      - name: Run Linters # [cite: 28]
+          python-version: '3.12' 
+          # Dodanie cache dla pip zgodnie z wymaganiami [cite: 16, 108, 115]
+          cache: 'pip'
+
+      - name: Install Linting Tools
         run: |
+          python -m pip install --upgrade pip
           pip install flake8 black isort
-          flake8 . 
-          black --check . 
-          isort --check-only . 
+
+      - name: Run flake8
+        # Kontrola zgodności z PEP8 [cite: 29, 38]
+        run: flake8 .
+
+      - name: Run black check
+        # Sprawdzanie formatowania (blokuje merge przy błędach) [cite: 30, 37]
+        run: black --check .
+
+      - name: Run isort check
+        # Sprawdzanie kolejności importów [cite: 31]
+        run: isort --check-only .
