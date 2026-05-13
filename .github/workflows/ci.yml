@@ -20,6 +20,8 @@ jobs:
         with:
           python-version: '3.12'
           cache: 'pip' # Zadanie 7: Dodanie cache pip [cite: 108]
+      - name: xd
+        run: ls -la
       - name: Install Dependencies # [cite: 9]
         run: pip install -r ./mysite/requirements.txt
       - name: Basic Check
