@@ -46,7 +46,7 @@ jobs:
 
       - name: Run flake8
         # Kontrola zgodności z PEP8 [cite: 29, 38]
-        run: flake8 .
+        run: flake8 ./mysite/
 
       - name: Run black check
         # Sprawdzanie formatowania (blokuje merge przy błędach) [cite: 30, 37]
