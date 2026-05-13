@@ -5,11 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - [cite_start]name: Run Bandit # [cite: 66]
+      - name: Run Bandit 
         run: |
           pip install bandit
           bandit -r .
-      - [cite_start]name: Run Safety # [cite: 67]
+      - name: Run Safety 
         run: |
           pip install safety
-          safety check # [cite: 68]
+          safety check 
