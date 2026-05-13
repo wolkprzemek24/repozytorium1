@@ -26,6 +26,8 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: pip install -r ./mysite/requirements.txt
+      - name: Run MakeMigrations 
+        run: python ./mysite/manage.py makemigrations
       - name: Run Migrations 
         run: python ./mysite/manage.py migrate
       - name: Run Tests 
