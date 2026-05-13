@@ -1,0 +1,8 @@
+2026-05-10 17:39:57.903 | t=2026-05-10T15:39:57+0000 lvl=info msg="open config file" path=/var/lib/ngrok/ngrok.yml err=nil
+2026-05-10 17:39:57.903 | t=2026-05-10T15:39:57+0000 lvl=info msg="open config file" path=/var/lib/ngrok/auth-config.yml err=nil
+2026-05-10 17:39:57.909 | t=2026-05-10T15:39:57+0000 lvl=info msg="FIPS 140 mode" enabled=false
+2026-05-10 17:39:57.912 | t=2026-05-10T15:39:57+0000 lvl=info msg="starting web service" obj=web addr=0.0.0.0:4040 allow_hosts=[]
+2026-05-10 17:39:58.233 | t=2026-05-10T15:39:58+0000 lvl=info msg="client session established" obj=tunnels.session
+2026-05-10 17:39:58.233 | t=2026-05-10T15:39:58+0000 lvl=info msg="tunnel session started" obj=tunnels.session
+2026-05-10 17:39:58.306 | t=2026-05-10T15:39:58+0000 lvl=info msg="update available" obj=updater
+2026-05-10 17:39:58.667 | t=2026-05-10T15:39:58+0000 lvl=info msg="started tunnel" obj=tunnels name=command_line addr=http://woodpecker-server:8000 url=https://19df-188-122-27-177.ngrok-free.app
